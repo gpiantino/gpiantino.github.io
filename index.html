@@ -1,49 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My GitHub Pages Site</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #24292e;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    main {
-      padding: 40px;
-      text-align: center;
-    }
-    footer {
-      background: #24292e;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Academic Webpage</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <h1>Welcome to My Website</h1>
+  <header class="topbar">
+    <div class="container">
+      <div class="brand">Your Name</div>
+      <nav>
+        <a href="#cv">CV</a>
+        <a href="#research">Research</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <p>This site is hosted using GitHub Pages 🚀</p>
-    <p>Edit <strong>index.html</strong> to customize it.</p>
-  </main>
+  <div class="container main">
+    <aside class="sidebar">
+      <img src="profile.png" alt="profile" class="avatar" />
+      <h2 class="name">Igor Ferreira Batista Martins</h2>
+      <p class="subtitle">Econometrics | Finance | Macroeconomics</p>
 
-  <footer>
-    <p>© 2025 My GitHub Site</p>
-  </footer>
+      <ul class="info">
+        <li>📍 Örebro, Sweden</li>
+        <li>🏫 Örebro University</li>
+        <li>✉️ <a href="mailto:you@example.com">Email</a></li>
+        <li>🔗 <a href="#">Google Scholar</a></li>
+        <li>🐙 <a href="#">Github</a></li>
+        <li>🔗 <a href="#">LinkedIn</a></li>
+      </ul>
+    </aside>
+
+    <section class="content">
+      <h1 id="research">Research</h1>
+
+      <h2>Publications</h2>
+      <ul class="papers">
+        <li><a href="#">What Events Matter For Exchange Rate Volatility</a> <em>Quarterly Review of Economics and Finance, 2025</em></li>
+        <li><a href="#">Good Volatility, Bad Volatility and the Cross Section of Commodity Returns</a> <em>Finance Research Letters, 2025</em></li>
+        <li><a href="#">Stochastic Volatility Models with Skewness Selection</a> <em>Entropy, 2024</em></li>
+      </ul>
+
+      <h2>Working Papers</h2>
+      <ul class="papers">
+        <li><a href="#">Disaggregated impulse response functions via the classifier-Lasso</a> <em>R&R - Journal of Applied Econometrics</em></li>
+        <li><a href="#">Fast and Slow Level Shifts in Intraday Stochastic Volatility</a> <em>Journal of Financial Econometrics</em></li>
+        <li><a href="#">Volume-driven time-of-day effects in intraday volatility models</a> <em>International Journal of Forecasting</em></li>
+      </ul>
+
+      <footer id="contact" class="page-foot">
+        <p>© <span id="year"></span> Your Name — <a href="mailto:you@example.com">you@example.com</a></p>
+      </footer>
+    </section>
+  </div>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
