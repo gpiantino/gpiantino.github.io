@@ -39,3 +39,18 @@ body{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvet
   .avatar{width:90px;height:90px}
   .content{width:100%}
 }
+
+.section .collapsible {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 320ms ease, opacity 280ms ease;
+  opacity: 0;
+  padding-top: 0;
+}
+.section.open .collapsible {
+  opacity: 1;
+  padding-top: 12px;
+  /* large enough to fit your content — JS will set inline max-height */
+}
+.nav-link.active { color: var(--accent); font-weight:700; }
+
