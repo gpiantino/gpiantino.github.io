@@ -5,6 +5,38 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Guilherme's Webpage</title>
   <link rel="stylesheet" href="styles.css" />
+  <!-- Small styles to make <details> look nice — you can also move this to styles.css -->
+  <style>
+    details { background: transparent; border: 0; margin-bottom: 18px; }
+    details summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 6px 0;
+      outline: none;
+    }
+    /* hide default triangle */
+    details summary::-webkit-details-marker { display: none; }
+    /* caret on right */
+    details summary::after {
+      content: "▾";
+      float: right;
+      font-size: 20px;
+      transition: transform .18s ease;
+      transform-origin: center;
+      color: var(--muted, #777);
+    }
+    details[open] summary::after { transform: rotate(180deg); }
+
+    /* ensure headings inside summary keep visual weight */
+    details summary h1, details summary h2 { display: inline-block; margin: 0; }
+
+    /* spacing for details content */
+    details > *:not(summary) { margin-top: 12px; }
+
+    /* Small tweak: make nested <em> lines appear on new line in the course list */
+    .papers em { display: inline-block; margin-top: 4px; color: var(--muted, #666); }
+  </style>
 </head>
 <body>
   <header class="topbar">
@@ -37,58 +69,94 @@
     </aside>
 
     <section class="content">
-      <h1 id="research">Research</h1>
 
-      <h2>Conference Papers</h2>
-      <ul class="papers">
-      <!--
-        <li><a href="#">What Events Matter For Exchange Rate Volatility</a> <em>Quarterly Review of Economics and Finance, 2025</em></li>
-        <li><a href="#">Good Volatility, Bad Volatility and the Cross Section of Commodity Returns</a> <em>Finance Research Letters, 2025</em></li>
-        <li><a href="#">Stochastic Volatility Models with Skewness Selection</a> <em>Entropy, 2024</em></li>
-      -->
-      </ul>
-      
-      <h2>Working Papers</h2>
-      <ul class="papers">
-      <!--
-        <li><a href="#">Disaggregated impulse response functions via the classifier-Lasso</a> <em>R&R - Journal of Applied Econometrics</em></li>
-        <li><a href="#">Fast and Slow Level Shifts in Intraday Stochastic Volatility</a> <em>Journal of Financial Econometrics</em></li>
-        <li><a href="#">Volume-driven time-of-day effects in intraday volatility models</a> <em>International Journal of Forecasting</em></li>
-      -->
-      </ul>
+      <!-- Research (collapsed by default) -->
+      <section id="research-section">
+        <details>
+          <summary><h1 id="research">Research</h1></summary>
 
-      <h1 id="teaching">Teaching</h1>
+          <h2>Conference Papers</h2>
+          <ul class="papers">
+            <!--
+            <li><a href="#">What Events Matter For Exchange Rate Volatility</a> <em>Quarterly Review of Economics and Finance, 2025</em></li>
+            <li><a href="#">Good Volatility, Bad Volatility and the Cross Section of Commodity Returns</a> <em>Finance Research Letters, 2025</em></li>
+            <li><a href="#">Stochastic Volatility Models with Skewness Selection</a> <em>Entropy, 2024</em></li>
+            -->
+          </ul>
 
-<h2>Courses</h2>
-<ul class="papers">
-  <li>
-    <strong>Advanced Econometrics</strong> — Master’s level  
-    <br>
-    <em>Insper, 2024–2025</em> — <em>Teaching Assistant</em>
-  </li>
+          <h2>Working Papers</h2>
+          <ul class="papers">
+            <!--
+            <li><a href="#">Disaggregated impulse response functions via the classifier-Lasso</a> <em>R&R - Journal of Applied Econometrics</em></li>
+            <li><a href="#">Fast and Slow Level Shifts in Intraday Stochastic Volatility</a> <em>Journal of Financial Econometrics</em></li>
+            <li><a href="#">Volume-driven time-of-day effects in intraday volatility models</a> <em>International Journal of Forecasting</em></li>
+            -->
+          </ul>
 
-  <li>
-    <strong>Bayesian Learning</strong> — Master’s level  
-    <br>
-    <em>Insper, 2025</em> — <em>Teaching Assistant</em>
-  </li>
+        </details>
+      </section>
 
-  <li>
-    <strong>Advanced Bayesian Econometrics</strong> — Doctoral level  
-    <br>
-    <em>Insper, 2025</em> — <em>Teaching Assistant</em>
-  </li>
-</ul>
+      <!-- Teaching (collapsed by default) -->
+      <section id="teaching-section">
+        <details>
+          <summary><h1 id="teaching">Teaching</h1></summary>
 
+          <h2>Courses</h2>
+          <ul class="papers">
+            <li>
+              <strong>Advanced Econometrics</strong> — Master’s level  
+              <br>
+              <em>Insper, 2024–2025</em> — <em>Teaching Assistant</em>
+            </li>
+
+            <li>
+              <strong>Bayesian Learning</strong> — Master’s level  
+              <br>
+              <em>Insper, 2025</em> — <em>Teaching Assistant</em>
+            </li>
+
+            <li>
+              <strong>Advanced Bayesian Econometrics</strong> — Doctoral level  
+              <br>
+              <em>Insper, 2025</em> — <em>Teaching Assistant</em>
+            </li>
+          </ul>
+
+        </details>
+      </section>
 
       <footer id="contact" class="page-foot">
-        <p>© <span id="year"></span> Your Name — <a href="mailto:you@example.com">you@example.com</a></p>
+        <p>© <span id="year"></span> Guilherme Piantino — <a href="mailto:you@example.com">you@example.com</a></p>
       </footer>
     </section>
   </div>
 
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* Optional: Make top nav links open the corresponding <details> when clicked.
+     This is tiny JS that enhances nav behaviour (you can remove it to remain pure HTML). */
+  (function(){
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    navLinks.forEach(a => {
+      a.addEventListener('click', function(e){
+        const targetId = this.getAttribute('href').slice(1);
+        // if there's a details that contains an element with this id, open it
+        const detail = document.querySelector(`details:has(#${CSS.escape(targetId)})`);
+        if (detail) {
+          // toggle open if clicking same open summary, otherwise open
+          if (!detail.hasAttribute('open')) detail.open = true;
+          // scroll to the header
+          setTimeout(()=> {
+            const el = document.getElementById(targetId);
+            if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+          }, 40);
+          // prevent default jump so we get smooth UX
+          e.preventDefault();
+        }
+      });
+    });
+  })();
 </script>
 </body>
 </html>
